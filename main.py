@@ -1,4 +1,4 @@
-class User():
+class Account():
     def __init__(self, num, name, roi, balance):
       self.num = num
       self.name = name
@@ -6,79 +6,86 @@ class User():
       self.bal = balance
 
     def acc_sum(self):
-        print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi}% ")
-        
-class ChequingAccount(User):
+        print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi}%\nYour Balance is: ${self.bal:.2f} ")
+    def getName(self):
+        return self.name   
+class ChequingAccount(Account):
     def __init__(self, num, name, roi, balance):
         super().__init__(num, name, roi, balance)
-        self.balance = 0
         self.overdraft_limit = 500
 
     def summary(self):
         self.acc_sum()
-        print(f'Account Balance: ${self.balance:.2f}')
+        print(f'Account Balance: ${self.bal:.2f}')
 
     def deposit (self,dep_amount):
         self.dep_amount = dep_amount
-        self.balance += dep_amount
+        self.bal += dep_amount
         print(f'You have successfully deposited ${self.dep_amount:.2f}')
-        print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
-        print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
+        print(f'Your new account balance is: ${self.bal:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
+        print(f'Your total account balance is: ${self.bal + self.overdraft_limit:.2f}')
 
     def withdraw (self,withdraw_amount):
         self.withdraw_amount = withdraw_amount
-        if self.balance >= withdraw_amount:
-            self.balance -= withdraw_amount
+        self.amount = self.bal + self.overdraft_limit
+        if self.bal >= withdraw_amount - self.overdraft_limit:
+            self.bal -= withdraw_amount
             print(f'You have successfully withdrew ${self.withdraw_amount:.2f}')
-            print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
-            print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
-        elif self.balance <= withdraw_amount or self.balance == 0:
-            self.amount = self.balance + self.overdraft_limit
-            print(f'You have successfully withdrew: ${self.amount:.2f}')
-            print(f'Your new account balance is: ${self.balance - self.amount:.2f}')
+            print(f'Your new account balance is: ${self.bal:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
+            print(f'Your total account balance is: ${self.bal + self.overdraft_limit:.2f}')
         else:
-            print(f'You have insufficent funds. Please try again.\nBalance available: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
-            print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
+            print(f'You have insufficent funds. Please try again.\nBalance available: ${self.bal:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
+            print(f'Your total account balance is: ${self.bal + self.overdraft_limit:.2f}')
 
-class SavingAccount(User):
+class SavingAccount(Account):
     def __init__(self, num, name, roi, balance):
         super().__init__(num, name, roi, balance)
-        self.balance = 0
-        self.overdraft_limit = 1000
+        self.min_limit = 1000
 
     def summary(self):
         self.acc_sum()
-        print(f'Account Balance: ${self.balance:.2f}')
+        print(f'Account Balance: ${self.bal:.2f}')
 
     def deposit (self,dep_amount):
         self.dep_amount = dep_amount
-        self.balance += dep_amount
+        self.bal += dep_amount
         print(f'You have successfully deposited ${self.dep_amount:.2f}')
-        print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
-        print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
+        print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.min_limit:.2f}')
+        print(f'Your total account balance is: ${self.balance + self.min_limit:.2f}')
 
     def withdraw (self,withdraw_amount):
         self.withdraw_amount = withdraw_amount
-        if self.balance >= withdraw_amount:
-            self.balance -= withdraw_amount
+        if self.bal >= withdraw_amount:
+            self.bal -= withdraw_amount
             print(f'You have successfully withdrew ${self.withdraw_amount:.2f}')
-            print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
-            print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
-        elif self.balance <= withdraw_amount or self.balance == 0:
-            self.amount = self.balance + self.overdraft_limit
-            print(f'You have successfully withdrew: ${self.amount:.2f}')
-            print(f'Your new account balance is: ${self.balance - self.amount:.2f}')
+            print(f'Your new account balance is: ${self.bal:.2f} with overdraft limit of: ${self.min_limit:.2f}')
+            print(f'Your total account balance is: ${self.bal + self.min_limit:.2f}') 
         else:
-            print(f'You have insufficent funds. Please try again.\nBalance available: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
-            print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
+            print(f'You have insufficent funds. Please try again.\nBalance available: ${self.bal:.2f} with minimum limit of: ${self.min_limit:.2f}')
+            print(f'Your total account balance is: ${self.bal + self.min_limit:.2f}')
+
 
 print('Welcome to SS Bank!')
 num = int(input('Please enter your Account Number: '))
 name = input('Please enter your name: ')
 roi = int(input('Please enter rate of interest: '))
-balance = print("Your current balance is: $0")
+balance = int(input("Enter your balance: $"))
+
 Chequing = ChequingAccount(num, name, roi, balance)
 Savings = SavingAccount(num, name, roi, balance)
+
+asif=Account(1234,"asif", 4, 1200)
+audrey=Account(1235,"audrey", 4, 1200)
+george=Account(1236,"george", 4, 1200)
+harneet=Account(1237,"harneet", 2, 1200)
+areeba=Account(1238, "areeba", 2, 1200)
+
+list=[asif, audrey, george, harneet, areeba]
+
+for acc in list:
+    if (acc.getName()).lower==(name).lower:
+       acc.acc_sum()
+    
 
 inAccountSelection = True
 
