@@ -6,7 +6,7 @@ class User():
       self.bal = balance
 
     def acc_sum(self):
-        print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi}% ")
+        print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi}%\nCurrent Account Balance: {self.bal} ")
         
 class ChequingAccount(User):
     def __init__(self, num, name, roi, balance):
@@ -23,6 +23,7 @@ class ChequingAccount(User):
         self.balance += dep_amount
         print(f'You have successfully deposited ${self.dep_amount:.2f}')
         print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
+        print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
 
     def withdraw (self,withdraw_amount):
         self.withdraw_amount = withdraw_amount
@@ -32,8 +33,9 @@ class ChequingAccount(User):
             print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
             print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
         elif self.balance <= withdraw_amount:
-            print(f'You have successfully withdrew ${self.balance + self.overdraft_limit:.2f}')
-            print(f'Your new account balance is: ${self.balance:.2f}')
+            self.amount = self.balance + self.overdraft_limit
+            print(f'You have successfully withdrew: ${self.amount:.2f}')
+            print(f'Your new account balance is: ${self.balance - self.amount:.2f}')
         else:
             print(f'You have insufficent funds. Please try again.\nBalance avaliable: ${self.balance:.2f}')
 
@@ -52,6 +54,7 @@ class SavingAccount(User):
         self.balance += dep_amount
         print(f'You have successfully deposited ${self.dep_amount:.2f}')
         print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
+        print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
 
     def withdraw (self,withdraw_amount):
         self.withdraw_amount = withdraw_amount
@@ -61,8 +64,9 @@ class SavingAccount(User):
             print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
             print(f'Your total account balance is: ${self.balance + self.overdraft_limit:.2f}')
         elif self.balance <= withdraw_amount:
-            print(f'You have successfully withdrew ${self.balance + self.overdraft_limit:.2f}')
-            print(f'Your new account balance is: ${self.withdraw_amount:.2f}')
+            self.amount = self.balance + self.overdraft_limit
+            print(f'You have successfully withdrew: ${self.amount:.2f}')
+            print(f'Your new account balance is: ${self.balance - self.amount:.2f}')
         else:
             print(f'You have insufficent funds. Please try again.\nBalance avaliable: ${self.balance:.2f}')
 
@@ -119,4 +123,4 @@ while inAccountSelection:
     else:
         print('That is an invalid command. Please try again!')
 
-print('Thank you for using the SS Bank!')
+print('Thank you for visitng SS Bank. Have a good day!')
