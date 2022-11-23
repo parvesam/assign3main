@@ -3,18 +3,18 @@ class User():
       self.num = num
       self.name = name
       self.roi = roi
-      roi = 4
 
-    def account_summary(self):
-        print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi} ")
+    def acc_sum(self):
+        print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi}% ")
         
 class ChequingAccount(User):
     def __init__(self, num, name, roi):
         super().__init__(num, name, roi)
         self.balance = 0
+        self.overdraft_limit = 500
 
     def summary(self):
-        self.account_summary()
+        self.acc_sum()
         print(f'Account Balance: ${self.balance:.2f}')
 
     def deposit (self,dep_amount):
@@ -32,13 +32,14 @@ class ChequingAccount(User):
         else:
             print(f'You have insufficent funds. Please try again.\nBalance avaliable: ${self.balance:.2f}')
 
-class SavingsAccount(User):
+class SavingAccount(User):
     def __init__(self, num, name, roi):
         super().__init__(num, name, roi)
         self.balance = 0
+        self.overdraft_limit = 1000
 
     def summary(self):
-        self.account_summary()
+        self.acc_sum()
         print(f'Account Balance: ${self.balance:.2f}')
 
     def deposit (self,dep_amount):
@@ -59,53 +60,53 @@ class SavingsAccount(User):
 print('Welcome to the SS Bank!')
 num = int(input('Please enter your Account Number: '))
 name = input('Please enter your name: ')
-roi = print("Your rate of interest is 4%")
+roi = int(input('Please enter rate of interest: '))
 Chequing = ChequingAccount(num, name, roi)
-Savings = SavingsAccount(num, name, roi)
+Savings = SavingAccount(num, name, roi)
 
 inAccountSelection = True
 
 while inAccountSelection:
-    account_type = input(f"Hello there {name}. Which account would you like to access today?\nType 'c' for checking account\nType 's' for savings account\nType 'q' to quit the system\n: ").lower()
+    acc_type = input(f"\nHello there {name}. Which account would you like to access today?\nType 'c' for checking account\nType 's' for savings account\nType 'q' to quit the system\n: ").lower()
     
-    if account_type == 'c':
+    if acc_type == 'c':
         session = True
         while session:
-            action = input("\nType 'd' to deposit money\nType 'w' to withdraw money\nType 'summary' to view a summary of your account\nType 'm' to go to main menu\n: ").lower()
-            if action == 'd':
+            act = input("\nType 'd' to deposit money\nType 'w' to withdraw money\nType 'sum' to view a summary of your account\nType 'm' to go to main menu\n: ").lower()
+            if act == 'd':
                 dep_amount = float(input('How much would you like to deposit?: '))
                 Chequing.deposit(dep_amount)
-            elif action == 'w':
+            elif act == 'w':
                 with_amount = float(input('How much would you like to withdraw? '))
                 Chequing.withdraw(with_amount)
-            elif action == 'summary':
+            elif act == 'sum':
                 Chequing.summary()
-            elif action == 'm':
+            elif act == 'm':
                 session = False
             else:
                 print('Invalid input. Please try again.')
 
-    elif account_type == 's':
+    elif acc_type == 's':
         session = True
         while session:
-            action = input("\nType 'd' to deposit money\nType 'w' to withdraw money\nType 'summary' to view a summary of your account\nType 'm' to go to main menu\n: ").lower()
-            if action == 'd':
+            act = input("\nType 'd' to deposit money\nType 'w' to withdraw money\nType 'sum' to view a summary of your account\nType 'm' to go to main menu\n: ").lower()
+            if act == 'd':
                 dep_amount = float(input('How much would you like to deposit?: '))
                 Savings.deposit(dep_amount)
-            elif action == 'w':
+            elif act == 'w':
                 with_amount = float(input('How much would you like to withdraw? '))
                 Savings.withdraw(with_amount)
-            elif action == 'summary':
+            elif act == 'sum':
                 Savings.summary()
-            elif action == 'm':
+            elif act == 'm':
                 session = False
             else:
                 print('Invalid input. Please try again.')
 
-    elif account_type == 'q':
+    elif acc_type == 'q':
         inAccountSelection = False 
     
     else:
-        print('That is an invalid command. Please try again.')
+        print('That is an invalid command. Please try again!')
 
 print('Thank you for using the SS Bank!')
