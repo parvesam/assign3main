@@ -29,7 +29,6 @@ class ChequingAccount(Account):
 
     def withdraw (self,withdraw_amount):
         self.withdraw_amount = withdraw_amount
-        self.amount = self.bal + self.overdraft_limit
         if self.bal >= withdraw_amount - self.overdraft_limit:
             self.bal -= withdraw_amount
             print(f'You have successfully withdrew ${self.withdraw_amount:.2f}')
