@@ -7,8 +7,10 @@ class Account():
 
     def acc_sum(self):
         print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi}%\nYour Balance is: ${self.bal:.2f} ")
+
     def getName(self):
         return self.name   
+
 class ChequingAccount(Account):
     def __init__(self, num, name, roi, balance):
         super().__init__(num, name, roi, balance)
@@ -63,7 +65,6 @@ class SavingAccount(Account):
         else:
             print(f'You have insufficent funds. Please try again.\nBalance available: ${self.bal:.2f} with minimum limit of: ${self.min_limit:.2f}')
             print(f'Your total account balance is: ${self.bal + self.min_limit:.2f}')
-
 
 print('Welcome to SS Bank!')
 num = int(input('Please enter your Account Number: '))
