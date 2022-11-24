@@ -50,8 +50,8 @@ class SavingAccount(Account):
         self.dep_amount = dep_amount
         self.bal += dep_amount
         print(f'You have successfully deposited ${self.dep_amount:.2f}')
-        print(f'Your new account balance is: ${self.balance:.2f} with overdraft limit of: ${self.min_limit:.2f}')
-        print(f'Your total account balance is: ${self.balance + self.min_limit:.2f}')
+        print(f'Your new account balance is: ${self.bal:.2f} with overdraft limit of: ${self.min_limit:.2f}')
+        print(f'Your total account balance is: ${self.bal + self.min_limit:.2f}')
 
     def withdraw (self,withdraw_amount):
         self.withdraw_amount = withdraw_amount
@@ -84,8 +84,7 @@ list=[asif, audrey, george, harneet, areeba]
 
 for acc in list:
     if (acc.getName()).lower==(name).lower:
-       acc.acc_sum()
-    
+       acc.acc_sum() 
 
 inAccountSelection = True
 
