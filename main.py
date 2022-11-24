@@ -6,7 +6,7 @@ class Account():
       self.bal = balance
 
     def acc_sum(self):
-        print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi}%\nYour Balance is: ${self.bal:.2f} ")
+        print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi}% ")
 
     def getName(self):
         return self.name   
@@ -57,7 +57,7 @@ class SavingAccount(Account):
 
     def withdraw (self,withdraw_amount):
         self.withdraw_amount = withdraw_amount
-        if self.bal >= withdraw_amount:
+        if self.bal >= withdraw_amount - self.min_limit:
             self.bal -= withdraw_amount
             print(f'You have successfully withdrew ${self.withdraw_amount:.2f}')
             print(f'Your new account balance is: ${self.bal:.2f} with overdraft limit of: ${self.min_limit:.2f}')
