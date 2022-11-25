@@ -1,14 +1,14 @@
 class Account():
-    def __init__(self, num, name, roi, balance):
-      self.num = num
+    def __init__(self, num, name, roi, balance): #created constructor
+      self.num = num #define parameters
       self.name = name
       self.roi = roi
       self.bal = balance
 
-    def acc_sum(self):
+    def acc_sum(self): #displays the summary of account no, name and rate of interest
         print(f"\nPersonal Information\nAccount No: {self.num}\nName: {self.name}\nRate Of Interest: {self.roi}% ")
 
-    def getName(self):
+    def getName(self): #returns the name
         return self.name   
 
 class ChequingAccount(Account):
@@ -16,18 +16,18 @@ class ChequingAccount(Account):
         super().__init__(num, name, roi, balance)
         self.overdraft_limit = 500
 
-    def summary(self):
+    def summary(self): #displays the summary of balance in the account
         self.acc_sum()
         print(f'Account Balance: ${self.bal:.2f}')
 
-    def deposit (self,dep_amount):
+    def deposit (self,dep_amount):  # Function for depositing money
         self.dep_amount = dep_amount
         self.bal += dep_amount
         print(f'You have successfully deposited ${self.dep_amount:.2f}')
         print(f'Your new account balance is: ${self.bal:.2f} with overdraft limit of: ${self.overdraft_limit:.2f}')
         print(f'Your total account balance is: ${self.bal + self.overdraft_limit:.2f}')
 
-    def withdraw (self,withdraw_amount):
+    def withdraw (self,withdraw_amount): # Function for withdrawing money
         self.withdraw_amount = withdraw_amount
         if self.bal >= withdraw_amount - self.overdraft_limit:
             self.bal -= withdraw_amount
@@ -43,18 +43,18 @@ class SavingAccount(Account):
         super().__init__(num, name, roi, balance)
         self.min_limit = 1000
 
-    def summary(self):
+    def summary(self): #displays the summary of balance in the account
         self.acc_sum()
         print(f'Account Balance: ${self.bal:.2f}')
 
-    def deposit (self,dep_amount):
+    def deposit (self,dep_amount):  # Function for depositing money
         self.dep_amount = dep_amount
         self.bal += dep_amount
         print(f'You have successfully deposited ${self.dep_amount:.2f}')
         print(f'Your new account balance is: ${self.bal:.2f} with overdraft limit of: ${self.min_limit:.2f}')
         print(f'Your total account balance is: ${self.bal + self.min_limit:.2f}')
 
-    def withdraw (self,withdraw_amount):
+    def withdraw (self,withdraw_amount): # Function for withdrawing money
         self.withdraw_amount = withdraw_amount
         if self.bal >= withdraw_amount - self.min_limit:
             self.bal -= withdraw_amount
@@ -65,16 +65,17 @@ class SavingAccount(Account):
             print(f'You have insufficent funds. Please try again.\nBalance available: ${self.bal:.2f} with minimum limit of: ${self.min_limit:.2f}')
             print(f'Your total account balance is: ${self.bal + self.min_limit:.2f}')
 
+#Admin new customer profile and exisitng profile access
 print('Welcome to SS Bank!')
-num = int(input('Please enter your Account Number: '))
-name = input('Please enter your name: ')
-roi = int(input('Please enter rate of interest: '))
-balance = int(input("Enter your balance: $"))
+num = int(input('Please enter your Account Number: ')) #asks for account number
+name = input('Please enter your name: ') #asks for name
+roi = int(input('Please enter rate of interest: ')) #asks for rate of interest
+balance = int(input("Enter your balance: $")) #asks for the amount in the balance
 
 Chequing = ChequingAccount(num, name, roi, balance)
 Savings = SavingAccount(num, name, roi, balance)
 
-asif=Account(1234,"asif", 4, 1200)
+asif=Account(1234,"asif", 4, 1200) #creates an array
 audrey=Account(1235,"audrey", 4, 1200)
 george=Account(1236,"george", 4, 1200)
 harneet=Account(1237,"harneet", 2, 1200)
@@ -88,7 +89,7 @@ for acc in list:
 
 inAccountSelection = True
 
-while inAccountSelection:
+while inAccountSelection: #Admin menu after login function
     acc_type = input(f"\nHello there {name}. Which account would you like to access today?\nType 'c' for chequing account\nType 's' for savings account\nType 'q' to quit the system\n: ").lower()
     
     if acc_type == 'c':
@@ -125,7 +126,7 @@ while inAccountSelection:
             else:
                 print('Invalid input. Please try again.')
 
-    elif acc_type == 'q':
+    elif acc_type == 'q': #allows the user to quit
         inAccountSelection = False 
     
     else:
